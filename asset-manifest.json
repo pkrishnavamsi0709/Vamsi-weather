@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Vamsi-weather/static/css/main.3bbbe53c.css",
+    "main.js": "/Vamsi-weather/static/js/main.b057b16f.js",
+    "static/js/787.71fc0d61.chunk.js": "/Vamsi-weather/static/js/787.71fc0d61.chunk.js",
+    "static/media/Weather-Desktop-Wallpaper.jpg": "/Vamsi-weather/static/media/Weather-Desktop-Wallpaper.ab1865a5f378ff8d0ab3.jpg",
+    "index.html": "/Vamsi-weather/index.html",
+    "main.3bbbe53c.css.map": "/Vamsi-weather/static/css/main.3bbbe53c.css.map",
+    "main.b057b16f.js.map": "/Vamsi-weather/static/js/main.b057b16f.js.map",
+    "787.71fc0d61.chunk.js.map": "/Vamsi-weather/static/js/787.71fc0d61.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3bbbe53c.css",
+    "static/js/main.b057b16f.js"
+  ]
+}
