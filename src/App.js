@@ -34,7 +34,7 @@ function App() {
     sethumidity(response.data.main.humidity);
     setspeed(response.data.wind.speed);
     setLocation(response.data.name);
-    setdesc(response.data.weather.main);
+    setdesc(response.data.weather[0].main);
     setShow(true);
   })
     }
