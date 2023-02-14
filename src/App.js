@@ -8,8 +8,11 @@ function App() {
   const [location,setLocation]=useState("");
   const [show,setShow]=useState(false);
   const [temp,settemp]=useState(0);
+  const [Pressure,setpressure]=useState(0);
   const [humidity,sethumidity]=useState(0.0);
   const [speed,setspeed]=useState(0.0);
+  const [rise,setrise]=useState("");
+  const [set,setset]=useState("");
   const [desc,setdesc]=useState("clody");
 
 
@@ -22,7 +25,10 @@ function App() {
         sethumidity(response.data.main.humidity);
         setspeed(response.data.wind.speed);
         setLocation(response.data.name);
-        setdesc(response.data.weather[0].main);
+        setpressure(response.data.main.pressure);
+        setdesc(response.data.weather[0].description);
+        setset(covertUnixToHour(response.data.sys.sunset));
+    setrise(covertUnixToHour(response.data.sys.sunrise));
         setShow(true);
       })
     }
@@ -34,51 +40,61 @@ function App() {
     sethumidity(response.data.main.humidity);
     setspeed(response.data.wind.speed);
     setLocation(response.data.name);
-    setdesc(response.data.weather[0].main);
+    setpressure(response.data.main.pressure);
+    setdesc(response.data.weather[0].description);
+    setset(covertUnixToHour(response.data.sys.sunset));
+    setrise(covertUnixToHour(response.data.sys.sunrise));
     setShow(true);
   })
     }
+
+    const covertUnixToHour= (input) => {
+      let date = new Date(input* 1000).toString();
+      let time = date.slice(16, 24);
+      return time;
+  }
   
   
   return (
-    <div className='app'>
-      <div  className="searchbox">
-        <input 
-        value={location}
-        onChange={event => setLocation(event.target.value)}
-        placeholder="Location Name"
-        onKeyPress={searchlocation}
-        type="text" />
-        <button onClick={buttonsearch}>Search</button>
+    <div className={(typeof desc!= "undefined")
+    ?(desc === "clear sky" || desc === "few cloluds" || desc === "scatterd clouds")
+      ?"app warm"
+      :(desc === "broken clouds"|| desc === "shower rain" || desc === "rain")
+        ? "app rain" 
+        :"app"
+    :"app"}>
+    <main>
+      <div className="search_box">
+         <input 
+         value={location}
+         onChange={event => setLocation(event.target.value)}
+         placeholder="Location"
+         onKeyPress={searchlocation}
+         type="text"
+         className='search_bar'/> 
+         <button onClick={buttonsearch} className="search_btn">serach</button>
       </div>
-    {show && <div className='container'>
-     <div className="top">
-     <div className="location">
-      <p>{location}</p>
+      {show&&<div>
+        <div className='Location_box'>
+          <div className="location">{location}</div>
+        </div>
+      
+        <div className="temp_box">
+          <div className='temperature'>{Math.round(temp)}°C</div>
+          <div className='description'>{desc}</div>
+          <div></div>
+          <div className="check">SUN RISE :{rise} AM</div>
+          <div className="check">SUN SET :{set} PM</div>
+        </div>
+        <div className='value_box'>
+          <p className='pre'>Pressure : {Pressure}hPa</p>
+          <p className='hum'>Humidity : {humidity}%</p>
+          <p className="speed">Speed : {Math.round(speed)}km/s</p>
+        </div>
       </div>
-     <div className="temp">
-     <h2>{Math.round(temp)} &deg;C</h2>
-      </div>
-      <div className="description">
-      <p>{desc}</p>
-     </div>
-     </div>
-     <div className="bottom">
-     <div className="temper">
-      <p>Temperature</p>
-      <p className="value">{Math.round(temp)} &deg;C</p>
-      </div>
-      <div className="humidity">
-      <p>Humidity</p>
-      <p className="value">{humidity} %</p>
-      </div>
-      <div className="windspeed">
-      <p>Wind Speed</p>
-      <p className="value">{speed} Km/s</p>
-      </div>
-      </div> 
-    </div> }   
-    
+      }
+      
+    </main>
       
     
     </div>
@@ -86,3 +102,4 @@ function App() {
 }
 
 export default App;
+
