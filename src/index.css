@@ -72,7 +72,7 @@ button{
 
 .container{
   max-width:700px;
-  height:580px;
+  height:auto;
   margin:auto;
   padding:0 1rem;
   position:relative;
